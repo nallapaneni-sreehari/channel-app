@@ -33,7 +33,7 @@
     font-family: "Roboto";
  }
   .container {
-    height: 94%;
+    height: 100%;
     width: 100%;
     display: flex;
  }
@@ -61,6 +61,8 @@
     display: flex;
     flex-direction: column;
     flex: 0 0 240px;
+    height: 90%;
+
  }
   .channels .channels-header {
     cursor: pointer;
@@ -93,7 +95,8 @@
     margin: 0 -20px 0 -20px;
  }
   .channels .channels-header-name {
-    font-size: 1rem;
+    font-size: 20px;
+    color: white;
     font-weight: 500;
  }
   .channels .channel {
@@ -176,22 +179,13 @@
   .channels .channels-list .channels-list-header:hover::after, .channels .channels-list .channels-list-header:focus::after {
     opacity: 1;
  }
-  .channels .channels-list .channels-list-header::after {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    content: " ";
-    width: 10px;
-    height: 10px;
-    opacity: 0.3;
-    transition: opacity 0.2s linear;
-    background: url('data:image/svg+xml; base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMCAxMCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTguOTksMy45OUg2LjAxVjEuMDFDNi4wMSwwLjQ1Miw1LjU1OCwwLDUsMFMzLjk5LDAuNDUyLDMuOTksMS4wMVYzLjk5SDEuMDFDMC40NTIsMy45OSwwLDQuNDQyLDAsNWMwLDAuNTU4LDAuNDUyLDEuMDEsMS4wMSwxLjAxSDMuOTlWOC45OUMzLjk5LDkuNTQ4LDQuNDQyLDEwLDUsMTBzMS4wMS0wLjQ1MiwxLjAxLTEuMDFWNi4wMUg4Ljk5QzkuNTQ4LDYuMDEsMTAsNS41NTgsMTAsNUMxMCw0LjQ0Miw5LjU0OCwzLjk5LDguOTksMy45OXoiLz48L3N2Zz4=') no-repeat 50%;
- }
+ 
   .channels .channels-footer {
     display: flex;
     align-items: center;
     flex: 0 0 70px;
-    margin-top: auto;
+    /* margin-top: auto; */
+    /* margin-bottom: 65px; */
     background: #282b30;
     border-top: 1px solid #1c1e21;
     padding: 0 10px;
@@ -217,20 +211,22 @@
     filter: brightness(200%);
  }
   .channels .channels-footer .avatar {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
  }
   .channels .channels-footer .username, .channels .channels-footer .tag {
     display: block;
-    font-weight: 300;
+    font-weight: 500;
+    color: white;
+    font-size: 12px;
  }
   .channels .channels-footer .username {
-    font-size: 0.9rem;
+    font-size: 15px;
  }
   .channels .channels-footer .tag {
     color: rgba(255, 255, 255, 0.45);
-    font-size: 0.7rem;
+    font-size: 12px;
  }
   .menu {
     flex: 0 0 57px;
