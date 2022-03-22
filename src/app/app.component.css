@@ -1,0 +1,12 @@
+.mat-toolbar {
+    position: relative;
+  }
+  
+  .mat-toolbar.mat-primary {
+    background: #3f51b5;
+    color: #fff;
+    position: relative;
+}
+* {
+  font-family: 'Alegreya Sans SC';font-size: 18px;
+}

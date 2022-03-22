@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Create New Channel</h1>
+<div mat-dialog-content>
+
+    <form #channelForm="ngForm" (ngSubmit)="onSubmit(channelForm)">
+
+        <mat-form-field appearance="fill" [style.width.px]=400>
+            <mat-label>Channel Name</mat-label>
+            <input matInput [(ngModel)]="data.channelName" name="name">
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-form-field appearance="fill" [style.width.px]=170>
+            <mat-label>Channel Size</mat-label>
+    
+            <input matInput type="number" [(ngModel)]="data.channelSize" 
+            #channelSize="ngModel" name="size" [style.width.px]=135 required minlength="10" maxlength="250">
+    
+            <mat-error *ngIf="channelSize.errors && (channelSize.errors['minlength'] || channelSize.errors['maxlength'])">
+                Invalid channel size
+            </mat-error>
+        </mat-form-field>
+    
+        <br>
+    
+    
+        <mat-radio-group aria-label="Select Channel Type" [(ngModel)]="data.channelType" name="type">
+            <mat-label>Select Channel Type</mat-label> <br>  <br>
+            <mat-radio-button value="public">Public</mat-radio-button> &nbsp;&nbsp;
+            <mat-radio-button value="private">Private</mat-radio-button>
+        </mat-radio-group>
+        <br>
+        <br>
+        <mat-checkbox class="example-margin" name="paid" [(ngModel)]="data.isPaidChannel">Paid Channel</mat-checkbox>
+    
+        <br> 
+        <mat-form-field appearance="fill" *ngIf="data.isPaidChannel">
+            <mat-label>
+                Channel Entry Free
+            </mat-label>
+    
+            <input matInput type="number" [(ngModel)]="data.channelEntryFee" 
+                #channelPrice="ngModel" name="price" [style.width.px]=125 required>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button color="primary" type="submit" [mat-dialog-close]="data" cdkFocusInitial>Create</button>
+</div>

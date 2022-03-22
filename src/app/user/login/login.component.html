@@ -1,0 +1,82 @@
+<div class="container" style="background: white; border-radius: 30px;">
+  <div class="row" style="border: #e7d8d8 solid 2px; margin-top: 55px;  border-radius: 30px;">
+    <div class="col-md-6"  style="margin-top: 120px">
+      <!-- <img class="img-responsive" 
+      src="../../../assets/img/login-1.webp" style="margin-top: 62px;" alt="login.png"> -->
+      
+      <img class="img-responsive" 
+      src="../../../assets/img/login-2.webp" style="margin-top: 30px;" alt="login.png">
+    </div>
+    <div class="col-md-6" style="margin-top: 242px">
+      
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title text-center" style="float: left;">
+            <i class="bi bi-key h1 float-left"></i> &nbsp;LOG IN
+          </h2>
+
+          <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form-group mt-5">
+            <br>
+            <mat-error *ngIf="!loginValid" class="text-center h6">
+              The username and password were not recognized
+            </mat-error>
+            <mat-form-field appearance="fill" [style.width.px]=400>
+              <input matInput placeholder="Email" [(ngModel)]="username" name="username" required>
+              <mat-error class="text-center h6">
+                Please provide a valid email address
+              </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" [style.width.px]=400>
+              <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+              <mat-error class="text-center h6">
+                Please provide a valid password
+              </mat-error>
+            </mat-form-field>
+    
+            <br>
+            <!-- <mat-form-field> -->
+              <mat-checkbox class="example-margin" [(ngModel)]="checked" name="checked">Remember Me</mat-checkbox>
+            <!-- </mat-form-field> -->
+           <br><br>
+           <div class="text-center" style="float: left;">
+            <button mat-raised-button color="primary" style="width: 150px; height: 50px;" [disabled]="!loginForm.form.valid">Login</button>
+          </div>
+          
+          </form>
+        </div>
+      </div>
+
+      <!-- <mat-card>
+        <mat-card-content>
+            &nbsp;
+          <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+    
+            <h2 class="align-middle">Log In</h2>
+            <mat-error *ngIf="!loginValid" class="text-center h6">
+              The username and password were not recognized
+            </mat-error>
+            <mat-form-field>
+              <input matInput placeholder="Email" [(ngModel)]="username" name="username" required>
+              <mat-error class="text-center h6">
+                Please provide a valid email address
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+              <mat-error class="text-center h6">
+                Please provide a valid password
+              </mat-error>
+            </mat-form-field>
+           <br>
+            <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Login</button>
+          </form>
+        </mat-card-content>
+        &nbsp;
+    </mat-card> -->
+    </div>
+  </div>
+</div>
+
+
+  

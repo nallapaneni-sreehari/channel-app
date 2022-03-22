@@ -1,0 +1,13 @@
+* {
+    font-family: 'Alegreya Sans SC';font-size: 18px;
+  }
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+
+  .mat-dialog-content{
+    height: 400px;
+}
