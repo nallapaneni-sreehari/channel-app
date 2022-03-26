@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ToastEvokeService } from '@costlydeveloper/ngx-awesome-popup';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   messages: any;
 
-  constructor() { }
+  constructor(private toastEvokeService: ToastEvokeService) { }
 
   public selectChatIndex = 0;
 
@@ -19,6 +20,8 @@ export class HomeComponent implements OnInit {
   public currentChannel: any = '';
 
   public currentChatChannels: any= '';
+
+  public loginToastSubscription:any = '';
 
   servers:any = [
     {
@@ -75,6 +78,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.currentChatChannels = this.servers[0]?.channels;
     this.currentChannel = this.currentChatChannels[0];
     this.currentChat = this.servers[0];
@@ -105,16 +109,17 @@ export class HomeComponent implements OnInit {
       };
     });
 
-    this.messages.push({
-      text: event.message,
-      date: new Date(),
-      reply: true,
-      type: files.length ? 'file' : 'text',
-      files: files,
-      user: {
-        name: 'Jonh Doe',
-        avatar: 'https://i.gifer.com/no.gif',
-      },
-    });
+  }
+
+
+
+
+
+
+
+
+  ngOnDestroy(): void 
+  {
+    
   }
 }

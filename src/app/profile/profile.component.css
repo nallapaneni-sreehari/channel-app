@@ -8,6 +8,11 @@ body{margin-top:20px;
         font-size: 12px;
         letter-spacing: 1px;
     }
+    
+    input::-webkit-input-placeholder {
+        font-size: 12px;
+        line-height: 3;
+    }
     .account-settings .user-profile {
         margin: 0 0 1rem 0;
         padding-bottom: 1rem;

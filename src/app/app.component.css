@@ -1,3 +1,6 @@
+@import "toastr";
+
+
 .mat-toolbar {
     position: relative;
   }

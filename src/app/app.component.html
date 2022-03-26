@@ -1,26 +1,30 @@
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
   <span>
-    <button mat-button routerLink="/">{{title}}</button>
-    <button mat-button routerLink="/login">
+    <button mat-button>{{title}} <span style="font-size: 12px;">&nbsp; v 1.0.0</span></button>
+    <!-- <button mat-button routerLink="/login">
       <i class="bi bi-house-door"></i>
-    </button>
+    </button> -->
   </span>
+
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
     <button mat-button routerLink="/login" *ngIf="!isAuthenticated">
       <i class="bi bi-power"></i> &nbsp;
       Login
     </button>
-    <button mat-button *ngIf="isAuthenticated" (click)="logout()">
-      <i class="bi bi-box-arrow-right"></i> &nbsp;
-      Logout
-    </button>
-    <button mat-button *ngIf="!isAuthenticated" routerLink="/register">
-      <i class="bi bi-person-plus"></i> &nbsp;
-      Register
+
+    <button mat-button routerLink="/home">
+      <i class="bi bi-house"></i> &nbsp;
+      Home
     </button>
 
-    <button mat-button [matMenuTriggerFor]="beforeMenu" *ngIf="isAuthenticated">
-      Hi, Sreehari &nbsp;
+    <button mat-button *ngIf="!global.userToken" routerLink="/login">
+      <i class="bi bi-power"></i> &nbsp;
+      Login to Access Your data
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="beforeMenu" *ngIf="global.userToken">
+
+      Hi👋, {{global.name}} &nbsp;
       <img src="../assets/img/user.png" alt="user" width="45px" style="cursor: pointer;">
 
       <mat-menu #beforeMenu="matMenu" xPosition="before">
@@ -35,6 +39,12 @@
         <button mat-menu-item (click)="openDialog()">
           <i class="bi bi-person-lines-fill"></i> &nbsp;Create Channel
         </button>
+
+        <button mat-button (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i> &nbsp;
+          Logout
+        </button>
+
       </mat-menu>
 
     </button>
@@ -46,21 +56,27 @@
 </mat-toolbar>
 
 <mat-menu x-position="before" #menu="matMenu">
-  <button mat-menu-item routerLink="/">
+  <button mat-menu-item routerLink="/home">
     <i class="bi bi-house-door"></i> &nbsp;
     Home
   </button>
-  <button mat-menu-item routerLink="/register">
+
+  <button mat-menu-item routerLink="/register" *ngIf="!global.userToken">
     <i class="bi bi-person-plus"></i> &nbsp;
     Register
   </button>
-  <button mat-menu-item routerLink="/login" *ngIf="!isAuthenticated">
+
+  <button mat-menu-item routerLink="/login" *ngIf="!global.userToken">
     <i class="bi bi-power"></i> &nbsp;
     Login
   </button>
-  <button mat-menu-item *ngIf="isAuthenticated" (click)="logout()">
+
+  <button mat-menu-item *ngIf="global.userToken" (click)="logout()">
     <i class="bi bi-box-arrow-right"></i> &nbsp;
     Logout
   </button>
+
 </mat-menu>
+
+
 <router-outlet></router-outlet>

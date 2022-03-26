@@ -27,7 +27,7 @@ export class CreateChannelComponent implements OnInit {
     channelName: '',
     channelSize: '',
     channelType: '',
-    isPaidChannel: '',
+    isPaidChannel: false,
     channelEntryFee: ''
   };
 
@@ -41,8 +41,7 @@ export class CreateChannelComponent implements OnInit {
 
   onSubmit(form:any)
   {
-    console.log(`Channel Form::: `, form.values);
-    
+    console.log(`Channel Form::: `, form);
   }
 }
 
