@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { GlobalDataService } from 'src/shared/services/global/global-data.service';
 import { CreateChannelComponent, DialogData } from './create-channel/create-channel.component';
 
 @Component({
@@ -11,10 +13,6 @@ export class AppComponent {
   title = 'CHANNELR';
   public isAuthenticated = true;
   
-  public logout(): void {
-    // todo
-  }
-
   public channelDetails = {};
   channelName: string="";
   channelSize: Number=0;
@@ -22,7 +20,12 @@ export class AppComponent {
   isPaidChannel: boolean=false;
   channelEntryFee: string=""
 
-  constructor(public dialog: MatDialog) {}
+  constructor
+  (
+    public dialog: MatDialog, 
+    public global: GlobalDataService,
+    private router: Router
+  ) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateChannelComponent, {
@@ -43,4 +46,20 @@ export class AppComponent {
       console.log('The dialog was closed', result, "this.channelDetails:: ",this.channelDetails);
     });
   }
+
+  public logout(): void 
+  {
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+
+    this.global.loginVerified = false;
+
+    this.global.userToken = '';
+
+    this.global.currentUser = '';
+
+    this.global.name = '';
+
+  }
+
 }

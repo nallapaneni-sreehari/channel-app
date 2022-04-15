@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from './user/user.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
@@ -27,6 +27,20 @@ import { ProfileComponent } from './profile/profile.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CreateServerComponent } from './create-server/create-server.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+
+import {
+  NgxAwesomePopupModule,
+  DialogConfigModule,
+  ConfirmBoxConfigModule,
+  ToastNotificationConfigModule
+} from '@costlydeveloper/ngx-awesome-popup';
+import { JoinServerComponent } from './join-server/join-server.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,9 +49,22 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     SettingsComponent,
     CreateChannelComponent,
     ProfileComponent,
-
+    CreateServerComponent,
+    JoinServerComponent,
   ],
   imports: [
+    NgbPaginationModule,
+    NgbAlertModule,
+    NgxAwesomePopupModule.forRoot(),
+    DialogConfigModule.forRoot(),
+    ConfirmBoxConfigModule.forRoot(),
+    ToastNotificationConfigModule.forRoot({
+      toastCoreConfig:{
+        autoCloseDelay: 5000
+      }
+    }),
+    HttpClientModule,
+    RouterModule,
     BrowserModule,
     MatRadioModule,
     MatCheckboxModule,
@@ -62,8 +89,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatOptionModule,
     MatListModule,
     MatDialogModule,
+    NgbModule,
   ],
-  providers: [],
+  providers: [FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

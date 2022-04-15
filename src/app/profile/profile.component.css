@@ -1,12 +1,65 @@
-mat-card{
-    margin-top: 150px;
-    width: 350px;
-    height: 400px;
-    display: block;
-    margin-left:auto;
-    margin-right:auto;  
-    vertical-align:middle;
-    border-radius: 30px;
-    border: 1px solid rgb(199, 162, 162);
-}
 
+body{margin-top:20px;
+    color: #bcd0f7;
+        background: #1A233A;
+    }
+    label{
+        color: white;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+    
+    input::-webkit-input-placeholder {
+        font-size: 12px;
+        line-height: 3;
+    }
+    .account-settings .user-profile {
+        margin: 0 0 1rem 0;
+        padding-bottom: 1rem;
+        text-align: center;
+    }
+    .account-settings .user-profile .user-avatar {
+        margin: 15px 0 1rem 0;
+    }
+    .account-settings .user-profile .user-avatar img {
+        width: 90px;
+        height: 90px;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px;
+        border-radius: 100px;
+    }
+    .account-settings .user-profile h5.user-name {
+        margin: 0 0 0.5rem 0;
+        color: white;
+        font-size: 20px;
+    }
+    .account-settings .user-profile h6.user-email {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 400;
+        color: white;
+    }
+    .account-settings .about {
+        margin: 1rem 0 0 0;
+        font-size: 0.8rem;
+        text-align: center;
+        color: white;
+        margin-top: 50px;
+    }
+    .card {
+        background: #272E48;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        border: 0;
+        margin-bottom: 1rem;
+    }
+    .form-control {
+        border: 1px solid #596280;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+        font-size: .825rem;
+        background: #1A233A;
+        color: #bcd0f7;
+    }

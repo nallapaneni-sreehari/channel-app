@@ -1,26 +1,51 @@
-<div class="container" style="background: white;  border-radius: 30px;">
-    <div class="row" style="border: #e7d8d8 solid 2px; margin-top: 55px;  border-radius: 30px;">
-      <div class="col-md-6"  style="margin-top: 120px">
+<div class="container" style="background: white;  border-radius: 30px; margin-top: 35px; ">
+    <div class="row" style="border: #e7d8d8 solid 2px; border-radius: 30px;">
+      <!-- <div class="col-md-6"  style="margin-top: 120px"> -->
         <!-- <img class="img-responsive" 
         src="../../../assets/img/login-1.webp" style="margin-top: 62px;" alt="login.png"> -->
         
-        <img class="img-responsive" 
-        src="../../../assets/img/register-1.webp" style="margin-top: 30px;" alt="register.png">
-      </div>
-      <div class="col-md-6" style="margin-top: 242px">
+        <img class="img-responsive col-md-6" style="border-radius: 30px 0px 0px 30px;" src="../../../assets/img/register-1.webp" alt="register.png">
+      <!-- </div> -->
+      <div class="col-md-6">
         
-        <div class="card">
-          <div class="card-body" style="margin-top: -120px;">
+        <div class="card" style="margin-top: 80px;">
+          <span class="text-danger h3 text-center" *ngIf="registerErrors">{{registerErrors}}</span>
+
+          <div class="card-body" style="margin-left: 40px;">
             <h2 class="card-title text-center" style="float: left;">
                 <i class="bi bi-person-plus-fill h1"></i> &nbsp;&nbsp;
                 REGISTER
             </h2>
-            <br>
-  
+            <!-- <br> -->
+
             <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form-group mt-5">
+
+
+              <div class="col-md-8 text-center text-success" *ngIf="registerLoading">
+                Registering...
+                &nbsp;&nbsp;
+                <div class="spinner-grow text-danger" role="status">
+                </div>
+                &nbsp;
+                <div class="spinner-grow text-primary" role="status">
+                </div>
+                &nbsp;
+                <div class="spinner-grow text-success" role="status">
+                </div>
+              </div>
+    
               <br>
 
               <mat-form-field appearance="fill" [style.width.px]=400>
+                <mat-label>Full Name </mat-label>
+                <input matInput placeholder="Full Name" [(ngModel)]="fullname" name="fullname" maxlength="35" required>
+                <mat-error class="text-center h6">
+                  Please provide Full name
+                </mat-error>
+              </mat-form-field>
+              <br>
+              <mat-form-field appearance="fill" [style.width.px]=400>
+                <mat-label>Email </mat-label>
                 <input matInput placeholder="Email" [(ngModel)]="username" name="username" required>
                 <mat-error class="text-center h6">
                   Please provide a valid email address
@@ -29,7 +54,10 @@
 
               <br>
               <mat-form-field appearance="fill" [style.width.px]=400>
-                <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+                <mat-label>Password </mat-label>
+                <input matInput type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password" [(ngModel)]="password" name="password" required>
+                <mat-icon matSuffix style="cursor: pointer;" (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off' }}</mat-icon>
+
                 <mat-error class="text-center h6">
                   Please provide a valid password
                 </mat-error>
@@ -38,7 +66,7 @@
               <br>
 
               <div class="form-group row">
-                <div class="col-md-3">
+                <div class="col-md-3" style="margin-right: 20px">
                     <mat-form-field appearance="fill" [style.width.px]=135>
                         <mat-label>Dail Code</mat-label>
                         <mat-select [(ngModel)] = "mobilecode" #mobile="ngModel" name="mobilecode" disableOptionCentering required>
@@ -49,7 +77,7 @@
                             placeholder="search for country" style="width: 150px;" (input)="onCountryCodeSearch(searchKey.value)">
                           </mat-form-field>
     
-                          <mat-option *ngFor="let code of mobilecodesBackup" [value]="code.dial_code">
+                          <mat-option *ngFor="let code of mobilecodesBackup" [value]="code">
                             {{code.dial_code}} &nbsp;
                             <img src="../../../assets/countries/{{code.code}}.png" alt="code.code">
                           </mat-option>
@@ -58,7 +86,7 @@
                         <mat-error *ngIf="mobile.errors && mobile.errors['required']">invalid code</mat-error>
                     </mat-form-field>
                 </div>
-
+                
                 <div class="col-md-6">
                     <mat-form-field appearance="fill" [style.width.px]=255>
                         <mat-label>mobile number</mat-label>
@@ -69,15 +97,20 @@
               </div> 
               <!-- <mat-form-field> -->
                 <mat-checkbox class="example-margin" [(ngModel)]="checked" name="checked">Accept <a href="#!">Terms and Conditions</a></mat-checkbox>
+                
+                
               <!-- </mat-form-field> -->
              <br><br>
              <div class="text-center" style="float: left;">
-              <button mat-raised-button color="primary" style="width: 150px; height: 50px;" [disabled]="!loginForm.form.valid">Register</button>
+              <button class="text-center" mat-raised-button color="primary" disabled="registerLoading" style="width: 150px; height: 50px; margin-right: 10px;" [disabled]="!loginForm.form.valid">Register</button>
             </div>
             
-            </form>
+          </form>
+          <p class="align-items-center">Already have account ? <a href="/login">Login Here</a></p>
           </div>
+          <br>
         </div>
+        <br>
       </div>
     </div>
   </div>

@@ -1,26 +1,46 @@
-<div class="container" style="background: white; border-radius: 30px;">
-  <div class="row" style="border: #e7d8d8 solid 2px; margin-top: 55px;  border-radius: 30px;">
-    <div class="col-md-6"  style="margin-top: 120px">
+<div class="container" style="background: white; border-radius: 30px; margin-top: 55px;">
+  <div class="row" style="border: #e7d8d8 solid 2px;border-radius: 30px;">
+    <!-- padding: 0 0 0 150px;  -->
+    <!-- <div class="col-md-6"  style="margin-top: 120px"> -->
       <!-- <img class="img-responsive" 
       src="../../../assets/img/login-1.webp" style="margin-top: 62px;" alt="login.png"> -->
       
-      <img class="img-responsive" 
-      src="../../../assets/img/login-2.webp" style="margin-top: 30px;" alt="login.png">
-    </div>
-    <div class="col-md-6" style="margin-top: 242px">
+      <img class="img-responsive col-md-6" style="border-radius: 30px 0px 0px 30px;" src="../../../assets/img/login-2.webp" alt="login.png">
+    <!-- </div> -->
+    <div class="col-md-6">
       
-      <div class="card">
-        <div class="card-body">
+      <div class="card" style="margin-top: 82px;">
+
+        <span class="text-danger h3 text-center" *ngIf="loginResponse.loginErrors">
+          {{loginResponse.loginErrors}}
+        </span>
+
+        <div class="card-body" style="margin-left: 40px;">
           <h2 class="card-title text-center" style="float: left;">
             <i class="bi bi-key h1 float-left"></i> &nbsp;LOG IN
           </h2>
+          <br>
 
           <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form-group mt-5">
+            <div class="col-md-8 text-center text-success" *ngIf="loginResponse.loginLoading">
+              Logging in...
+              &nbsp;&nbsp;
+              <div class="spinner-grow text-danger" role="status">
+              </div>
+              &nbsp;
+              <div class="spinner-grow text-primary" role="status">
+              </div>
+              &nbsp;
+              <div class="spinner-grow text-success" role="status">
+              </div>
+            </div>
+
             <br>
             <mat-error *ngIf="!loginValid" class="text-center h6">
               The username and password were not recognized
             </mat-error>
             <mat-form-field appearance="fill" [style.width.px]=400>
+              <mat-label>Username</mat-label>
               <input matInput placeholder="Email" [(ngModel)]="username" name="username" required>
               <mat-error class="text-center h6">
                 Please provide a valid email address
@@ -28,7 +48,10 @@
             </mat-form-field>
             <br>
             <mat-form-field appearance="fill" [style.width.px]=400>
-              <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+              <mat-label>Password</mat-label>
+              <input matInput type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password" [(ngModel)]="password" 
+              name="password" required>
+              <mat-icon matSuffix style="cursor: pointer;" (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off' }}</mat-icon>
               <mat-error class="text-center h6">
                 Please provide a valid password
               </mat-error>
@@ -39,11 +62,12 @@
               <mat-checkbox class="example-margin" [(ngModel)]="checked" name="checked">Remember Me</mat-checkbox>
             <!-- </mat-form-field> -->
            <br><br>
-           <div class="text-center" style="float: left;">
-            <button mat-raised-button color="primary" style="width: 150px; height: 50px;" [disabled]="!loginForm.form.valid">Login</button>
-          </div>
-          
-          </form>
+            <div class="text-center" style="float: left; margin-right: 10px;">
+              <button mat-raised-button color="primary" style="width: 150px; height: 50px;"
+                [disabled]="!(username || password)">Login</button>
+              </div>
+            </form>
+            <p class="align-items-center">No account ?<a href="/register"> Register Here</a></p>
         </div>
       </div>
 

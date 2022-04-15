@@ -1,53 +1,79 @@
-<main class="container">
+<main class="container" *ngIf="servers.length > 0 || serversAndChannelsUserIn.length > 0">
   <aside class="servers">
+
+    <!-- profile -->
     <div class="servers-collection">
       <div class="server focusable server-friends unread" role="button" aria-label="Friends unread">
-        <div class="server-icon"><svg>
-            <use xlink:href="#icon-friends" />
-          </svg></div>
-      </div>
-    </div>
-
-    <div class="servers-collection">
-      <div class="server focusable unread" role="button" aria-label="Discord Developers unread">
-        <div class="server-icon"><img
-            src="https://cdn.discordapp.com/icons/41771983423143937/edc44e98a690a1f76c5ddec68a0a6b9e.png" /></div>
-      </div>
-    </div>
-
-    <div class="servers-collection">
-      <div class="server focusable active" role="button" aria-label="My Server" aria-selected="true">
-        <div class="server-icon"><img src="https://discordapp.com/assets/0e291f67c9274a1abdddeb3fd919cbaa.png" />
+        <div class="server-icon">
+          <img src="../../assets/img/user.png" />
         </div>
       </div>
     </div>
+
+    <p style="color: white;font-size: 10px;word-break: break-word;" *ngIf="servers.length>0">Your Servers</p>
+
+    <!-- Chats -->
+
+    <!-- class='server focusable unread' -->
+    <div class="servers-collection" (click)="selectedServer(s,i, 'created'); currentServer=s" *ngFor = "let s of servers; let i = index;">
+      <div [ngClass]="i == selectedServerIndex && serverType=='created'? 'server focusable active' : 'server focusable'"
+       role="button" aria-label="Discord Developers unread">
+        <div class="server-icon"><img style="width: 100%; height: 100%;"
+            src={{s.profile}} alt='{{s.profile}}'/></div>
+      </div>
+    </div>
+    <button *ngIf="servers.length>0" class="btn btn-secondary" routerLink="/create-server"
+      style="width: 85%;height: 5%; margin-top: 10px;" title="Create new server">New server
+      <!-- <i class="bi bi-plus-circle text-center" title="Create New Server"></i> -->
+    </button>
+    <br>
+    <p style="color: white;font-size: 10px;word-break: break-word;" *ngIf="serversAndChannelsUserIn.length>0">Servers You're in</p>
+    <div class="servers-collection" (click)="selectedServer(s,j, 'joined'); currentServer=s" *ngFor = "let s of serversAndChannelsUserIn; let j = index;">
+      <div [ngClass]="j == selectedServerIndex && serverType=='joined'? 'server focusable active' : 'server focusable'"
+       role="button" aria-label="Discord Developers unread">
+        <div class="server-icon"><img style="width: 100%; height: 100%;"
+            src={{s.profile}} alt='{{s.profile}}'/></div>
+      </div>
+    </div>
+    <button  *ngIf="serversAndChannelsUserIn.length>0" (click)="joinServerDialog()"
+      class="btn btn-secondary" style="width: 85%;height: 5%; margin-top: 10px;" title="Join another server">Join server
+      <!-- <i class="bi bi-plus-circle text-center" title="Create New Server"></i> -->
+    </button>
+
   </aside>
 
   <aside class="channels">
     <header class="channels-header focusable">
-      <h3 role="header" class="channels-header-name">My Server</h3>
+      <h3 role="header" class="channels-header-name">{{currentChat.name}}</h3>
       <svg role="button" aria-label="Dropdown" class="channels-header-dropdown">
         <use xlink:href="#icon-dropdown" />
       </svg>
     </header>
 
     <section class="channels-list">
-      <header class="channels-list-header focusable" style="margin-bottom: 25px;">
-        <h5>Text Channels</h5>
+      <header class="channels-list-header" style="margin-bottom: 5px;">
+        <span>All Channels</span><i class="bi bi-plus-circle" style="float: right;"></i>
       </header>
 
-      <ul class="channels-list-text">
-        <li class="channel focusable channel-text active">
-          <span class="channel-name">general</span>
-          <button class="button" role="button" aria-label="Invite"><svg>
-              <use xlink:href="#icon-invite" />
-            </svg></button>
-          <button class="button" role="button" aria-label="settings"><svg>
-              <use xlink:href="#icon-channel-settings" />
-            </svg></button>
+      <h5 *ngIf="currentChatChannels.length == 0" style="color: white; font-size: 13px;">
+        <img src="../../assets/img/no-record.png" alt="channels not found" width="100%" height="100%">
+        <br>
+        No channels Found for this Server <br>
+      </h5>
+
+      <ul class="channels-list-text" *ngIf="currentChatChannels.length>0">
+        <li [ngClass]="i == selectChannelIndex ? 'channel focusable channel-text active' : 'channel focusable channel-text'"
+        (click)="selectChannel(c,i)" *ngFor="let c of currentChatChannels; let i = index;">
+          <span class="channel-name">{{c.name}}</span>
+          <button class="button" role="button" aria-label="Invite">
+            <i class="bi bi-person-plus"></i>
+          </button>
+          <button class="button" role="button" aria-label="settings">
+            <i class="bi bi-gear"></i>
+          </button>
         </li>
 
-        <li class="channel focusable channel-text">
+        <!-- <li class="channel focusable channel-text">
           <span class="channel-name">help</span>
           <button class="button" role="button" aria-label="Invite"><svg>
               <use xlink:href="#icon-invite" />
@@ -55,41 +81,175 @@
           <button class="button" role="button" aria-label="settings"><svg>
               <use xlink:href="#icon-channel-settings" />
             </svg></button>
-        </li>
+        </li> -->
       </ul>
 
-      <header class="channels-list-header focusable">
+      <!-- <header class="channels-list-header focusable">
         <h5>Voice Channels</h5>
-      </header>
+      </header> -->
     </section>
 
     <footer class="channels-footer">
-      <img class="avatar" alt="Avatar" src="https://discordapp.com/assets/0e291f67c9274a1abdddeb3fd919cbaa.png" />
+      <img class="avatar" alt="Avatar" src="{{currentServer.profile}}" />
       <div class="channels-footer-details">
-        <span class="username">yourself</span>
-        <span class="tag">#0001</span>
+        <span class="username">{{currentServer.name}}</span>
+        <span class="tag">{{currentServer.status ? currentServer.status : 'This channel is for '+currentServer.name}}</span>
       </div>
       <div class="channels-footer-controls button-group">
-        <button role="button" aria-label="Mute" class="button button-mute"><svg>
-            <use xlink:href="#icon-mute" />
-          </svg></button>
-        <button role="button" aria-label="Deafen" class="button button-deafen"><svg>
+        <button role="button" aria-label="Mute" class="button button-mute" style="background-color: #666667;">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+        &nbsp;
+        <!-- <button role="button" aria-label="Deafen" class="button button-deafen"><svg>
             <use xlink:href="#icon-deafen" />
-          </svg></button>
-        <button role="button" aria-label="Settings" class="button button-settings"><svg>
-            <use xlink:href="#icon-settings" />
-          </svg></button>
+          </svg></button> -->
+        <button role="button" aria-label="Settings" class="button button-settings" style="background-color: #666667;">
+          <i class="bi bi-gear-fill"></i>
+        </button>
       </div>
     </footer>
   </aside>
 
   <div class="vert-container">
     <menu type="toolbar" class="menu">
-      <h2 class="menu-name">general</h2>
+      <h2 *ngIf="currentChannel" class="menu-name">{{currentChannel.name}}</h2>
     </menu>
 
     <section class="chat">
+      <div class="container mt-2">
+        <div class="card mx-auto mt-2" style="width: 100%;">
+          <!-- <div class="card-header bg-transparent">
+              <div class="navbar navbar-expand p-0">
+                  <ul class="navbar-nav me-auto align-items-center">
+                      <li class="nav-item">
+                          <a href="#!" class="nav-link">
+                              <div class="position-relative"
+                                  style="width:50px; height: 50px; border-radius: 50%; border: 2px solid #e84118; padding: 2px">
+                                  <img src="https://nextbootstrap.netlify.app/assets/images/profiles/1.jpg"
+                                      class="img-fluid rounded-circle" alt="">
+                                  <span
+                                      class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                                      <span class="visually-hidden">New alerts</span>
+                                  </span>
+                              </div>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="#!" class="nav-link">Nelh</a>
+                      </li>
+                  </ul>
+                  <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">aaaaaaaaaa
+                          <a href="#!" class="nav-link">
+                              <i class="fas fa-phone-alt"></i>
+                          </a>
+                      </li>
+                      <li class="nav-item">aa
+                          <a href="#!" class="nav-link">
+                              <i class="fas fa-video"></i>
+                          </a>
+                      </li>axxxxxxxxxxxx
+                      <li class="nav-item">
+                          <a href="#!" class="nav-link">
+                              <i class="fas fa-times"></i>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </div> -->
+          <div class="card-body p-4" style="height: 500px; overflow: auto;">
 
+            <div *ngFor="let m of messages">
+              <!-- Incoming messages -->
+              <div class="d-flex align-items-baseline mb-4" *ngIf="m.senderId != service.userId">
+                <div class="position-relative avatar">
+                  <img src="{{m.senderProfile}}" class="img-fluid rounded-circle" alt="{{m.from}}">
+                  <span
+                    class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                  </span>
+                </div>
+                <div class="pe-2">
+                  <div>
+                    <p style="margin-left: 10px;font-size: 15px;">{{m.from}}</p>
+                    <div class="card card-text d-inline-block p-2 px-3 m-1" style="word-break: break-all;">
+                      {{m.text}}
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small" style="font-size: 12px;">{{m.createdAt | date:'short'}}</div>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- Outgoing message -->
+              <div class="d-flex align-items-baseline text-end justify-content-end mb-4" *ngIf="m.senderId == service.userId">
+                <div class="pe-2">
+                  <div>
+                    <p style="margin-right: 10px;font-size: 15px;">You</p>
+                    <div class="card card-text d-inline-block p-2 px-3 m-1" style="word-break: break-all;">{{m.text}}</div>
+                  </div>
+                  <div>
+                    <div class="small" style="font-size: 12px;">{{m.createdAt | date:'short'}}</div>
+                  </div>
+                </div>
+                <div class="position-relative avatar">
+                  <img src="{{service.profile}}" class="img-fluid rounded-circle" alt="">
+                  <span
+                    class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+              <!-- Voice message -->
+              <!-- <div class="d-flex align-items-baseline text-end justify-content-end mb-4">
+                  <div class="pe-2">
+                      <div>
+                          <div class="card card-text d-inline-block p-2 px-3 m-1">Cool</div>
+                      </div>
+                      <div>
+                          <div class="card card-text p-2 px-3 m-1 mb-5">
+                              <div class="row align-items-center">
+                                  <div class="col-1">
+                                      <a href=""><i class="fas fa-play"></i></a>
+                                  </div>
+                                  <div class="col">
+                                      <div class="progress" style="width:100px; height: 4px;">
+                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 35%"
+                                              aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </div>
+                                  <div class="col-auto">
+                                      <div class="small fw-bold">0:34</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="position-relative avatar">
+                      <img src="https://nextbootstrap.netlify.app/assets/images/profiles/2.jpg"
+                          class="img-fluid rounded-circle" alt="">
+                      <span
+                          class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                          <span class="visually-hidden">New alerts</span>
+                      </span>
+                  </div>
+              </div> -->
+
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-white ml-2">
+          <div class="input-group">
+              <input type="text" style="font-size: 20px;margin-left: 18px;" class="form-control form-control-lg border-0 mt-2" placeholder="Write a message..." [(ngModel)]="message.text">
+              <img src="../../assets/img/send.png" (click)="sendMessage()" alt="" width="7%" height="7%" style="cursor: pointer;">
+          </div>
+      </div>
     </section>
+
   </div>
 </main>
+
+<app-create-server *ngIf="servers.length == 0 && serversAndChannelsUserIn.length == 0"></app-create-server>

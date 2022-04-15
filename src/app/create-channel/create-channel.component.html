@@ -1,48 +1,59 @@
+
 <h1 mat-dialog-title>Create New Channel</h1>
-<div mat-dialog-content>
+<form #channelForm="ngForm" (ngSubmit)="onSubmit(channelForm)" name="myForm">
+    <div mat-dialog-content>
+    
+        <div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">Channel Name</label>
+                    <input type="text" name="name" placeholder="Enter Channel Name"
+                     id="name" class="form-control form-control-lg" required ngModel>
+                </div>
+    
+                <div class="col-md-6 mb-3">
+                    <label for="size" class="form-label">Channel Size</label>
+                    <input type="number" name="size" id="size" placeholder="Enter Channel Size" class="form-control form-control-lg" required ngModel>
+                </div>
+            </div>
+            
+            <br>    
+            
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label for="body" class="form-label">Channel Description (Bio)</label>
+                    <textarea type="text" name="desc" rows="2" id="desc" class="form-control"
+                        placeholder="Enter Channel Description" required ngModel></textarea>
+                </div>
+            </div>
+            <br>
+            <label for = "channelType" class="form-label">Channel Preferences</label>
+            <div class="row">
+                <div class="col">
+                    <mat-radio-group aria-label="Select an option" id="channelType" name="channelType" ngModel>
+                        <mat-radio-button value="private" style="margin-right: 20px;">Private Channel</mat-radio-button>
+                        <mat-radio-button value="public">Public Channel</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="col">
+                    <mat-checkbox name="isPaidChannel" ngModel>
+                        Make Paid Channel
+                    </mat-checkbox>
+                </div>
+            </div>
 
-    <form #channelForm="ngForm" (ngSubmit)="onSubmit(channelForm)">
+            <div class="row mt-2">
+                <div class="col-md-6" *ngIf="channelForm?.value.isPaidChannel">
+                    <label for="entryFee" class="form-label">Entry Fee To Join Channel</label>
+                    <input type="number" id="entryFee" name="entryFee" placeholder="Enter Entry Fee for Channel" 
+                    class="form-control form-control-lg mt-2" ngModel>
+                </div>
+            </div>
 
-        <mat-form-field appearance="fill" [style.width.px]=400>
-            <mat-label>Channel Name</mat-label>
-            <input matInput [(ngModel)]="data.channelName" name="name">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <mat-form-field appearance="fill" [style.width.px]=170>
-            <mat-label>Channel Size</mat-label>
-    
-            <input matInput type="number" [(ngModel)]="data.channelSize" 
-            #channelSize="ngModel" name="size" [style.width.px]=135 required minlength="10" maxlength="250">
-    
-            <mat-error *ngIf="channelSize.errors && (channelSize.errors['minlength'] || channelSize.errors['maxlength'])">
-                Invalid channel size
-            </mat-error>
-        </mat-form-field>
-    
-        <br>
-    
-    
-        <mat-radio-group aria-label="Select Channel Type" [(ngModel)]="data.channelType" name="type">
-            <mat-label>Select Channel Type</mat-label> <br>  <br>
-            <mat-radio-button value="public">Public</mat-radio-button> &nbsp;&nbsp;
-            <mat-radio-button value="private">Private</mat-radio-button>
-        </mat-radio-group>
-        <br>
-        <br>
-        <mat-checkbox class="example-margin" name="paid" [(ngModel)]="data.isPaidChannel">Paid Channel</mat-checkbox>
-    
-        <br> 
-        <mat-form-field appearance="fill" *ngIf="data.isPaidChannel">
-            <mat-label>
-                Channel Entry Free
-            </mat-label>
-    
-            <input matInput type="number" [(ngModel)]="data.channelEntryFee" 
-                #channelPrice="ngModel" name="price" [style.width.px]=125 required>
-        </mat-form-field>
-    </form>
-</div>
-<div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button color="primary" type="submit" [mat-dialog-close]="data" cdkFocusInitial>Create</button>
-</div>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()" style="background: #292b2c; color: white;">Discard</button>
+        <button mat-button color="primary" type="submit" style="background: #307232; color: white;">Create</button>
+    </div>
+</form>

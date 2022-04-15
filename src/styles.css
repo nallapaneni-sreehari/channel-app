@@ -1,9 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./assets/css/toast-ngx-awesome.css";
 
 html, body { height: 100%; }
 * {
-    font-family: 'Alegreya Sans SC';font-size: 18px;
+    /* font-family: 'Alegreya Sans SC';font-size: 18px; */
+
+    font-family: 'Poppins', sans-serif;font-size: 18px;
 }
 h1 {
     text-align: center;

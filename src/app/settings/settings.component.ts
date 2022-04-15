@@ -1,7 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
-
 export interface PeriodicElement {
   user_name: string;
   user_email: string;
@@ -48,31 +45,10 @@ export class SettingsComponent implements OnInit {
   displayedColumns: string[] = ['user', 'status', 'manager', 'actions'];
   dataSource = ELEMENT_DATA;
 
-    constructor(public dialog: MatDialog) {}
+    constructor() {}
 
   public edit = false;
 
   ngOnInit(): void {
   }
-openDialog(): void {
-    const dialogRef = this.dialog.open(UserDialog, {
-      width: '450px',
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-}
-export class UserDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<UserDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }
