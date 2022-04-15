@@ -1,9 +1,9 @@
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" style="position: sticky; top:0; z-index: 999;">
   <span>
     <button mat-button>{{title}} <span style="font-size: 12px;">&nbsp; v 1.0.0</span></button>
     <!-- <button mat-button routerLink="/login">
-      <i class="bi bi-house-door"></i>
-    </button> -->
+          <i class="bi bi-house-door"></i>
+        </button> -->
   </span>
 
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
@@ -17,10 +17,10 @@
       Home
     </button>
 
-    <button mat-button *ngIf="!global.userToken" routerLink="/login">
+    <!-- <button mat-button *ngIf="!global.userToken" routerLink="/login">
       <i class="bi bi-power"></i> &nbsp;
       Login to Access Your data
-    </button>
+    </button> -->
 
     <button mat-button [matMenuTriggerFor]="beforeMenu" *ngIf="global.userToken">
 
@@ -40,7 +40,7 @@
           <i class="bi bi-person-lines-fill"></i> &nbsp;Create Channel
         </button>
 
-        <button mat-button (click)="logout()">
+        <button mat-menu-item (click)="logout()">
           <i class="bi bi-box-arrow-right"></i> &nbsp;
           Logout
         </button>

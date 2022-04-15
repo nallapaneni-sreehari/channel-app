@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateServerComponent } from './create-server/create-server.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -12,8 +13,8 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
   {path:'settings', component:SettingsComponent},
-  {path:'profile', component:ProfileComponent}
-
+  {path:'profile', component:ProfileComponent},
+  {path:'create-server', component:CreateServerComponent}
 ];
 
 @NgModule({

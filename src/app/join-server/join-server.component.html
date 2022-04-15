@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="text-center sticky mb-5">
+        <h1>
+            <b style="font-size: 25px;">Search Server name to Join</b>
+        </h1>
+        <input style="font-size: 20px;" type="text" name="searchServer" class="form-control form-control-lg mt-5" id="searchServer"
+         [(ngModel)]="searchServerString" #searchKey (ngModelChange)="searchServer($event)" placeholder="search by server name">
+    </div>
+    <div mat-dialog-content class="row mt-5">
+
+        <p *ngIf="(serversList && serversList.length <= 0) || serversList==[]">
+            No servers Found
+        </p>
+
+        <div class="table-responsive" style="font-size: 25px;" *ngIf="serversList && serversList.length > 0">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <td><b>Server Name</b></td>
+                        <td><b>Action</b></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" *ngFor="let s of serversList">
+                        <td>
+                            {{s.name}}
+                        </td>
+                        <td>
+                            <button class="btn btn-success" [disabled]="joiningServer" style="font-size: 20px;" (click)="joinServer(s)">
+                                Join
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ngb-pagination class="d-flex justify-content-end" [collectionSize]="serversCount" [(page)]="page" [pageSize]="pageSize" 
+            (pageChange)="searchServer(searchServerString)"></ngb-pagination>
+        
+        </div>
+    </div>
+</div>

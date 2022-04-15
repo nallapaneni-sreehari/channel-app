@@ -31,6 +31,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CreateServerComponent } from './create-server/create-server.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {
   NgxAwesomePopupModule,
@@ -38,8 +39,8 @@ import {
   ConfirmBoxConfigModule,
   ToastNotificationConfigModule
 } from '@costlydeveloper/ngx-awesome-popup';
-
-
+import { JoinServerComponent } from './join-server/join-server.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -49,8 +50,11 @@ import {
     CreateChannelComponent,
     ProfileComponent,
     CreateServerComponent,
+    JoinServerComponent,
   ],
   imports: [
+    NgbPaginationModule,
+    NgbAlertModule,
     NgxAwesomePopupModule.forRoot(),
     DialogConfigModule.forRoot(),
     ConfirmBoxConfigModule.forRoot(),
@@ -85,7 +89,7 @@ import {
     MatOptionModule,
     MatListModule,
     MatDialogModule,
-    ModalModule.forRoot()
+    NgbModule,
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent]

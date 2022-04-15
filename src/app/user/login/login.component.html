@@ -64,7 +64,7 @@
            <br><br>
             <div class="text-center" style="float: left; margin-right: 10px;">
               <button mat-raised-button color="primary" style="width: 150px; height: 50px;"
-                [disabled]="!loginForm.form.valid">Login</button>
+                [disabled]="!(username || password)">Login</button>
               </div>
             </form>
             <p class="align-items-center">No account ?<a href="/register"> Register Here</a></p>

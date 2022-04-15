@@ -51,6 +51,15 @@ export class AppComponent {
   {
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
+
+    this.global.loginVerified = false;
+
+    this.global.userToken = '';
+
+    this.global.currentUser = '';
+
+    this.global.name = '';
+
   }
 
 }

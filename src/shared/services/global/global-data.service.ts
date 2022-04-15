@@ -11,6 +11,8 @@ export class GlobalDataService {
 
   public user = JSON.parse(this.storedItem);
 
+  public userId = this.user?.userId || '';
+  
   public loginVerified = this.user?.loginVerified || false;
 
   public userToken = this.user?.userToken || '';
@@ -18,6 +20,8 @@ export class GlobalDataService {
   public currentUser = this.user?.currentUser || '';
 
   public name = this.user?.name || '';
+
+  public profile = this.user?.profile || '';
 
 
 }
